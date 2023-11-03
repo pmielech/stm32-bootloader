@@ -48,6 +48,7 @@ MEMORY
   CCMRAM    (xrw)    : ORIGIN = 0x10000000,   LENGTH = 16K
   RAM    	(xrw)    : ORIGIN = 0x20000000,   LENGTH = 64K
   FLASH    	(rx)    : ORIGIN = 0x8000000,   LENGTH = 512K
+  BOOT		(rw)	: ORIGIN = 0x9fffa7ff,	LENGTH = 22K
 }
 
 /* Sections */
@@ -78,6 +79,19 @@ SECTIONS
     . = ALIGN(4);
     _etext = .;        /* define a global symbols at end of code */
   } >FLASH
+
+
+	.bootsection :
+	{
+	. = ALIGN(4);
+	__bootsection_start__ = .;
+	*(.bootsection*)
+	__bootsection_end__ = .;
+	} > BOOT
+	
+	/*check if BOOT usage exceeds BOOT size */
+	ASSERT(LENGTH(BOOT) >= (__bootsection_end__ - __bootsection_start__), "BOOT memory overflowed !")
+
 
   /* Constant data into "FLASH" Rom type memory */
   .rodata :
