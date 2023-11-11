@@ -10,7 +10,10 @@
 
 #include <stdio.h>
 
-#define LOCATE_FUNC __attribute__((section(".bootsection")))
-#define FLASH_APP_ADDR 0x8000000
+
+#define BOOTLOADER_START 	0x8000000
+#define BOOTLOADER_SIZE 	22
+
+#define FLASH_APP_ADDR		BOOTLOADER_START + (BOOTLOADER_SIZE * 1000 * 1024) //0x8005800
 
 #endif /* INC_DEV_BOOTLOADER_H_ */

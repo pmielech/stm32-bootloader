@@ -9,7 +9,8 @@
 #include "led.h"
 
 
-#define LONG_BLINK 2000u
+#define LONG_BLINK 1500u
+#define SHORT_BLINK 750u
 
 
 
@@ -23,8 +24,13 @@ void vLedProc(sys_process_t * sys_proc){
 
 		break;
 
+	case UPDATE:
 	case BOOTLOADER:
 		vLedBlinkLongTick();
+		break;
+
+	default:
+
 		break;
 
 	}
@@ -51,9 +57,27 @@ void vLedBlinkLongTick(void){
 	}
 	uint32_t tick = HAL_GetTick();
 
-	if (LONG_BLINK <= tick - tick_start)
-	{
-	    HAL_GPIO_TogglePin(SYS_LED_GPIO_Port, SYS_LED_Pin);
-	    tick_start = 0;
+	if(HAL_GPIO_ReadPin(SYS_LED_GPIO_Port, SYS_LED_Pin) == GPIO_PIN_RESET){
+
+		if (SHORT_BLINK <= tick - tick_start)
+		{
+		    HAL_GPIO_TogglePin(SYS_LED_GPIO_Port, SYS_LED_Pin);
+		    tick_start = 0;
+		}
+
+
+	} else {
+
+		if (LONG_BLINK <= tick - tick_start)
+			{
+			    HAL_GPIO_TogglePin(SYS_LED_GPIO_Port, SYS_LED_Pin);
+			    tick_start = 0;
+			}
+
 	}
+
+
+
+
 }
+

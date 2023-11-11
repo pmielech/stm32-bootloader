@@ -8,7 +8,7 @@
 #ifndef INC_DEV_LED_H_
 #define INC_DEV_LED_H_
 
-#include "main_proc.h"
+#include <main_process.h>
 #include "stm32f3xx.h"
 #include "main.h"
 

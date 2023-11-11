@@ -8,8 +8,10 @@
 #include "bootloader.h"
 
 
-//void JumpToApp(void)
-//{
+
+
+void JumpToApp(void)
+{
 //	uint32_t JumpAddress;
 //	pFunction Jump_To_Application;
 //
@@ -30,4 +32,6 @@
 //		//there is no application installed
 //		printf("No APP found\r\n");
 //	}
-//}
+}
+
+
