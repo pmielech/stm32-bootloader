@@ -16,4 +16,11 @@
 
 #define FLASH_APP_ADDR		BOOTLOADER_START + (BOOTLOADER_SIZE * 1000 * 1024) //0x8005800
 
+
+typedef void (*void_func)(void);
+
+void Regs_DeInit(void);
+void GPIO_DeInit(void);
+void DMA_DeInit(void);
+
 #endif /* INC_DEV_BOOTLOADER_H_ */
